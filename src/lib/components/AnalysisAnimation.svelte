@@ -1,18 +1,13 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { fly, fade } from 'svelte/transition';
+	import { fade } from 'svelte/transition';
 
-	interface Step {
-		label: string;
-		icon: string;
-	}
-
-	const steps: Step[] = [
-		{ label: 'Finding your customers...', icon: '🎯' },
-		{ label: 'Sizing your market...', icon: '📊' },
-		{ label: 'Scanning competitors...', icon: '🔍' },
-		{ label: 'Checking YC fit...', icon: '🚀' },
-		{ label: 'Generating verdict...', icon: '⚡' }
+	const steps: string[] = [
+		'Finding your customers',
+		'Sizing your market',
+		'Scanning competitors',
+		'Checking YC fit',
+		'Generating verdict'
 	];
 
 	let currentStep = $state(0);
@@ -33,40 +28,32 @@
 <div class="flex flex-col items-center justify-center py-16">
 	<div class="terminal-box p-8 w-full max-w-md">
 		<!-- Terminal header -->
-		<div class="flex items-center gap-2 mb-6 pb-4 border-b border-vibe-border">
-			<div class="w-3 h-3 rounded-full bg-vibe-red"></div>
-			<div class="w-3 h-3 rounded-full bg-vibe-yellow"></div>
-			<div class="w-3 h-3 rounded-full bg-vibe-green"></div>
-			<span class="ml-4 text-vibe-muted text-sm">analyzing_idea.sh</span>
+		<div class="flex items-center gap-3 mb-6 pb-4 border-b border-vibe-border">
+			<span class="text-vibe-mint">›</span>
+			<span class="text-vibe-muted text-sm">analyzing_idea.sh</span>
 		</div>
 
 		<!-- Progress steps -->
-		<div class="space-y-4">
+		<div class="space-y-3">
 			{#each steps as step, i}
 				<div
-					class="flex items-center gap-3 transition-all duration-300"
+					class="flex items-center gap-3 transition-all duration-300 font-mono text-sm"
 					class:opacity-40={i > currentStep}
 					class:opacity-100={i <= currentStep}
 				>
 					{#if completedSteps.includes(i)}
-						<span class="text-vibe-green text-lg" in:fade={{ duration: 200 }}>✓</span>
+						<span class="text-vibe-mint" in:fade={{ duration: 200 }}>[✓]</span>
 					{:else if i === currentStep}
-						<span class="text-lg animate-pulse">{step.icon}</span>
+						<span class="text-vibe-mint animate-pulse">[~]</span>
 					{:else}
-						<span class="text-vibe-muted text-lg">○</span>
+						<span class="text-vibe-muted">[ ]</span>
 					{/if}
 
 					<span
-						class="text-sm font-mono"
 						class:text-vibe-text={i <= currentStep}
 						class:text-vibe-muted={i > currentStep}
-						class:cursor-blink={i === currentStep}
 					>
-						{#if i <= currentStep}
-							{step.label}
-						{:else}
-							{step.label.replace(/\.\.\./g, '')}
-						{/if}
+						{step}{i === currentStep ? '...' : ''}
 					</span>
 				</div>
 			{/each}

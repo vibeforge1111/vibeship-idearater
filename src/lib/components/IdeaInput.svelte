@@ -48,11 +48,9 @@
 	<!-- Input form -->
 	<div class="terminal-box p-6 sm:p-8">
 		<!-- Terminal header -->
-		<div class="flex items-center gap-2 mb-6 pb-4 border-b border-vibe-border">
-			<div class="w-3 h-3 rounded-full bg-vibe-red"></div>
-			<div class="w-3 h-3 rounded-full bg-vibe-yellow"></div>
-			<div class="w-3 h-3 rounded-full bg-vibe-green"></div>
-			<span class="ml-4 text-vibe-muted text-sm">idea_validator</span>
+		<div class="flex items-center gap-3 mb-6 pb-4 border-b border-vibe-border">
+			<span class="text-vibe-mint">›</span>
+			<span class="text-vibe-muted text-sm">idea_validator</span>
 		</div>
 
 		<label class="block mb-4">

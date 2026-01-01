@@ -13,21 +13,21 @@
 	let showScore = $state(false);
 	let showDetails = $state(false);
 
-	const getYCColor = (verdict: string): string => {
+	const getYCIcon = (verdict: string): string => {
 		switch (verdict) {
-			case 'YES': return 'text-vibe-green';
-			case 'MAYBE': return 'text-vibe-yellow';
-			case 'PASS': return 'text-vibe-red';
-			default: return 'text-vibe-muted';
+			case 'YES': return '✓';
+			case 'MAYBE': return '~';
+			case 'PASS': return '✗';
+			default: return '~';
 		}
 	};
 
-	const getYCBg = (verdict: string): string => {
+	const getYCColor = (verdict: string): string => {
 		switch (verdict) {
-			case 'YES': return 'bg-vibe-green/10 border-vibe-green/30';
-			case 'MAYBE': return 'bg-vibe-yellow/10 border-vibe-yellow/30';
-			case 'PASS': return 'bg-vibe-red/10 border-vibe-red/30';
-			default: return 'bg-vibe-surface border-vibe-border';
+			case 'YES': return 'text-vibe-mint';
+			case 'MAYBE': return 'text-vibe-muted';
+			case 'PASS': return 'text-vibe-muted';
+			default: return 'text-vibe-muted';
 		}
 	};
 
@@ -39,11 +39,9 @@
 
 <div class="terminal-box w-full" id="scorecard">
 	<!-- Terminal header bar -->
-	<div class="flex items-center gap-2 px-6 py-4 border-b border-vibe-border bg-vibe-bg">
-		<div class="w-3 h-3 bg-vibe-red"></div>
-		<div class="w-3 h-3 bg-vibe-yellow"></div>
-		<div class="w-3 h-3 bg-vibe-green"></div>
-		<span class="ml-4 text-vibe-muted text-sm">vibeship idearater</span>
+	<div class="flex items-center gap-3 px-6 py-4 border-b border-vibe-border bg-vibe-bg">
+		<span class="text-vibe-mint">›</span>
+		<span class="text-vibe-muted text-sm">vibeship idearater</span>
 	</div>
 
 	<!-- Main content with generous padding -->
@@ -88,12 +86,13 @@
 			</div>
 
 			<!-- YC Verdict - clear and readable -->
-			<div class="mb-8 p-5 border {getYCBg(scoreCard.ycVerdict)}" in:fade={{ duration: 300, delay: 400 }}>
+			<div class="mb-8 p-5 bg-vibe-bg border border-vibe-border" in:fade={{ duration: 300, delay: 400 }}>
 				<div class="flex items-center gap-3 mb-2">
 					<span class="text-vibe-muted text-sm">YC Verdict:</span>
-					<span class="text-xl font-bold {getYCColor(scoreCard.ycVerdict)}">{scoreCard.ycVerdict}</span>
+					<span class="{getYCColor(scoreCard.ycVerdict)} font-mono">[{getYCIcon(scoreCard.ycVerdict)}]</span>
+					<span class="text-vibe-text font-bold">{scoreCard.ycVerdict}</span>
 				</div>
-				<p class="text-vibe-text text-base">{scoreCard.ycReason}</p>
+				<p class="text-vibe-muted text-base">{scoreCard.ycReason}</p>
 			</div>
 
 			<!-- Killer Insight - highlighted and prominent -->
