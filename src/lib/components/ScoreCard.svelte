@@ -69,12 +69,12 @@
 		<div class="flex flex-col lg:flex-row gap-5 mb-5">
 			<!-- PMF Score -->
 			{#if showScore}
-				<div class="flex-shrink-0" in:scale={{ duration: 400, start: 0.8 }}>
-					<div class="flex items-baseline gap-2">
-						<span class="text-5xl font-bold text-vibe-mint">{scoreCard.pmfScore}</span>
-						<span class="text-vibe-muted text-lg">/100</span>
+				<div class="flex-shrink-0 p-3 bg-vibe-mint/5 border border-vibe-mint/30" in:scale={{ duration: 400, start: 0.8 }}>
+					<p class="text-vibe-mint text-xs mb-1">PMF Score</p>
+					<div class="flex items-baseline gap-1">
+						<span class="text-4xl font-bold text-vibe-mint">{scoreCard.pmfScore}</span>
+						<span class="text-vibe-muted text-sm">/100</span>
 					</div>
-					<p class="text-vibe-muted text-xs">PMF Potential</p>
 				</div>
 			{/if}
 
