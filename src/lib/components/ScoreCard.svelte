@@ -15,6 +15,7 @@
 	let typedText = $state('');
 	let isTyping = $state(true);
 	let showPmfTooltip = $state(false);
+	let showYcTooltip = $state(false);
 	const fullText = 'idearater.vibeship.co';
 
 	// Tooltips for each dimension
@@ -118,13 +119,25 @@
 				{/if}
 
 				<!-- YC Verdict -->
-				<div class="flex-shrink-0 p-3 bg-vibe-yc/5 border border-vibe-yc/30" in:fade={{ duration: 300, delay: 200 }}>
+				<div
+					class="flex-shrink-0 p-3 bg-vibe-yc/5 border border-vibe-yc/30 relative"
+					in:fade={{ duration: 300, delay: 200 }}
+					onmouseenter={() => showYcTooltip = true}
+					onmouseleave={() => showYcTooltip = false}
+				>
 					<div class="flex items-center gap-2 mb-1">
-						<span class="text-vibe-yc font-bold text-sm">YC</span>
+						<span class="text-vibe-yc font-bold text-sm cursor-help">YC</span>
 						<span class="{getYCColor(scoreCard.ycVerdict)} font-mono text-sm">[{getYCIcon(scoreCard.ycVerdict)}]</span>
 						<span class="text-vibe-text font-bold text-sm">{scoreCard.ycVerdict}</span>
 					</div>
 					<p class="text-vibe-muted text-xs max-w-48">{scoreCard.ycReason}</p>
+					{#if showYcTooltip}
+						<div class="absolute top-full left-0 mt-2 px-3 py-2 bg-vibe-surface border border-vibe-border text-xs text-vibe-text whitespace-normal w-80 z-50 shadow-lg">
+							<span class="text-vibe-yc font-semibold">Y Combinator Verdict</span><br/>
+							Would this idea get into YC? Based on whether it solves a clear problem with a viable, product-led growth mechanism.
+							<div class="absolute bottom-full left-4 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-vibe-border"></div>
+						</div>
+					{/if}
 				</div>
 			{/if}
 		</div>

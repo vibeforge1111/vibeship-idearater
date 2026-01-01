@@ -10,6 +10,7 @@
 
 	let { scoreCard, stealthMode, onToggleStealth }: Props = $props();
 	let copying = $state(false);
+	let showStealthTooltip = $state(false);
 
 	const getShareText = (): string => {
 		const score = scoreCard.pmfScore;
@@ -48,12 +49,25 @@
 
 <!-- Share buttons inline -->
 <div class="flex items-center gap-2 flex-wrap" in:fade={{ duration: 300, delay: 500 }}>
-	<button
-		onclick={() => onToggleStealth()}
-		class="flex items-center gap-2 px-3 py-2 border transition-all text-sm font-mono {stealthMode ? 'bg-vibe-yc/20 border-vibe-yc text-vibe-yc' : 'bg-vibe-surface border-vibe-border text-vibe-muted hover:border-vibe-yc/50 hover:text-vibe-yc'}"
+	<div
+		class="relative"
+		onmouseenter={() => showStealthTooltip = true}
+		onmouseleave={() => showStealthTooltip = false}
 	>
-		<span class="text-vibe-yc">[</span>{stealthMode ? 'stealth: on' : 'stealth: off'}<span class="text-vibe-yc">]</span>
-	</button>
+		<button
+			onclick={() => onToggleStealth()}
+			class="flex items-center gap-2 px-3 py-2 border transition-all text-sm font-mono {stealthMode ? 'bg-vibe-yc/20 border-vibe-yc text-vibe-yc' : 'bg-vibe-surface border-vibe-border text-vibe-muted hover:border-vibe-yc/50 hover:text-vibe-yc'}"
+		>
+			<span class="text-vibe-yc">[</span>{stealthMode ? 'stealth: on' : 'stealth: off'}<span class="text-vibe-yc">]</span>
+		</button>
+		{#if showStealthTooltip}
+			<div class="absolute bottom-full left-0 mb-2 px-3 py-2 bg-vibe-surface border border-vibe-border text-xs text-vibe-text whitespace-normal w-72 z-50 shadow-lg">
+				<span class="text-vibe-yc font-semibold">Stealth Mode</span><br/>
+				Hide your idea when sharing. Your score stays visible, but the pitch is hidden so others can't see what you're building.
+				<div class="absolute top-full left-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-vibe-border"></div>
+			</div>
+		{/if}
+	</div>
 
 	<button
 		onclick={shareToX}
