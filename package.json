@@ -23,6 +23,7 @@
 		"vite": "^7.2.6"
 	},
 	"dependencies": {
-		"@anthropic-ai/sdk": "^0.71.2"
+		"@anthropic-ai/sdk": "^0.71.2",
+		"@sveltejs/adapter-node": "^5.4.0"
 	}
 }
