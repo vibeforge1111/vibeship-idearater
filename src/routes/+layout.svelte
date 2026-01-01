@@ -30,11 +30,20 @@
 	<div class="flex-1">
 		{@render children()}
 	</div>
-	<footer class="py-6 text-center">
-		<div class="flex items-center justify-center gap-4 text-vibe-muted text-xs">
-			<a href="/privacy" class="hover:text-vibe-mint transition-colors">Privacy</a>
-			<span>·</span>
-			<a href="/terms" class="hover:text-vibe-mint transition-colors">Terms</a>
+	<footer class="py-8 px-4">
+		<div class="max-w-2xl mx-auto">
+			<div class="flex flex-col sm:flex-row items-center justify-between gap-4 text-xs">
+				<div class="flex items-center gap-2">
+					<span class="text-vibe-mint font-semibold">vibeship</span>
+					<span class="text-vibe-muted">·</span>
+					<span class="text-vibe-muted">Vibe coded. For vibe coders.</span>
+				</div>
+				<div class="flex items-center gap-3 text-vibe-muted">
+					<a href="/terms" class="hover:text-vibe-mint transition-colors">Terms</a>
+					<span>·</span>
+					<a href="/privacy" class="hover:text-vibe-mint transition-colors">Privacy</a>
+				</div>
+			</div>
 		</div>
 	</footer>
 </div>
