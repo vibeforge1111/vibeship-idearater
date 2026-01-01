@@ -94,7 +94,7 @@
 						<span class="text-vibe-muted text-base">/100</span>
 					</div>
 					{#if showPmfTooltip}
-						<div class="absolute top-full left-0 mt-2 px-3 py-2 bg-vibe-surface border border-vibe-border text-xs text-vibe-text whitespace-normal w-64 z-50 shadow-lg">
+						<div class="absolute top-full left-0 mt-2 px-3 py-2 bg-vibe-surface border border-vibe-border text-xs text-vibe-text whitespace-normal w-80 z-50 shadow-lg">
 							<span class="text-vibe-mint font-semibold">Product-Market Fit Score</span><br/>
 							A weighted score measuring how well your idea matches market needs. Higher scores indicate stronger potential for success.
 							<div class="absolute bottom-full left-4 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-vibe-border"></div>

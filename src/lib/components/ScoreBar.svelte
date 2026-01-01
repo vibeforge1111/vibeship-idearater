@@ -76,7 +76,7 @@
 			>
 				{label}
 				{#if showTooltip && tooltip}
-					<div class="absolute bottom-full left-0 mb-2 px-3 py-2 bg-vibe-surface border border-vibe-border text-xs text-vibe-text whitespace-normal w-56 z-50 shadow-lg">
+					<div class="absolute bottom-full left-0 mb-2 px-3 py-2 bg-vibe-surface border border-vibe-border text-xs text-vibe-text whitespace-normal w-72 z-50 shadow-lg">
 						{tooltip}
 						<div class="absolute top-full left-4 w-0 h-0 border-l-4 border-r-4 border-t-4 border-transparent border-t-vibe-border"></div>
 					</div>
