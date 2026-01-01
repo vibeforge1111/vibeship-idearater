@@ -26,8 +26,17 @@
 	<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 </svelte:head>
 
-<div class="min-h-screen bg-vibe-bg">
-	{@render children()}
+<div class="min-h-screen bg-vibe-bg flex flex-col">
+	<div class="flex-1">
+		{@render children()}
+	</div>
+	<footer class="py-6 text-center">
+		<div class="flex items-center justify-center gap-4 text-vibe-muted text-xs">
+			<a href="/privacy" class="hover:text-vibe-mint transition-colors">Privacy</a>
+			<span>·</span>
+			<a href="/terms" class="hover:text-vibe-mint transition-colors">Terms</a>
+		</div>
+	</footer>
 </div>
 
 {#if showConsent}
