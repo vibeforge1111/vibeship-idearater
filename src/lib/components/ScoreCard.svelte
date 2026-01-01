@@ -1,6 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { fade, fly, scale } from 'svelte/transition';
+	import { fade, scale } from 'svelte/transition';
 	import ScoreBar from './ScoreBar.svelte';
 	import type { ScoreCard } from '$lib/types';
 
@@ -12,23 +12,13 @@
 	let { scoreCard, stealthMode = false }: Props = $props();
 	let showScore = $state(false);
 	let showDetails = $state(false);
-	let cardElement: HTMLDivElement | undefined = $state();
-
-	const getYCEmoji = (verdict: string): string => {
-		switch (verdict) {
-			case 'YES': return '🟢';
-			case 'MAYBE': return '🤔';
-			case 'PASS': return '🔴';
-			default: return '🤔';
-		}
-	};
 
 	const getYCColor = (verdict: string): string => {
 		switch (verdict) {
-			case 'YES': return 'var(--vibe-green)';
-			case 'MAYBE': return 'var(--vibe-yellow)';
-			case 'PASS': return 'var(--vibe-red)';
-			default: return 'var(--vibe-muted)';
+			case 'YES': return 'text-vibe-green';
+			case 'MAYBE': return 'text-vibe-yellow';
+			case 'PASS': return 'text-vibe-red';
+			default: return 'text-vibe-muted';
 		}
 	};
 
@@ -38,85 +28,69 @@
 	});
 </script>
 
+<!-- Optimized for 1200x630 social sharing aspect ratio (1.91:1) -->
 <div
-	bind:this={cardElement}
-	class="terminal-box p-6 sm:p-8 w-full max-w-lg mx-auto"
+	class="terminal-box w-full max-w-2xl mx-auto"
 	id="scorecard"
+	style="aspect-ratio: 1.91 / 1;"
 >
-	<!-- Terminal header -->
-	<div class="flex items-center gap-2 mb-6 pb-4 border-b border-vibe-border">
-		<div class="w-3 h-3 rounded-full bg-vibe-red"></div>
-		<div class="w-3 h-3 rounded-full bg-vibe-yellow"></div>
-		<div class="w-3 h-3 rounded-full bg-vibe-green"></div>
-		<span class="ml-4 text-vibe-muted text-sm">vibeship_idearater</span>
+	<!-- Terminal header bar -->
+	<div class="flex items-center gap-2 px-4 py-3 border-b border-vibe-border bg-vibe-bg">
+		<div class="w-3 h-3 bg-vibe-red"></div>
+		<div class="w-3 h-3 bg-vibe-yellow"></div>
+		<div class="w-3 h-3 bg-vibe-green"></div>
+		<span class="ml-3 text-vibe-muted text-xs">vibeship idearater — bash</span>
 	</div>
 
-	<!-- Big Score -->
-	{#if showScore}
-		<div class="text-center mb-6" in:scale={{ duration: 600, start: 0.5 }}>
-			<div class="text-6xl sm:text-7xl font-bold gradient-text mb-2">
-				{scoreCard.overallScore}<span class="text-3xl text-vibe-muted">/100</span>
+	<!-- Terminal content -->
+	<div class="p-5 space-y-3 text-sm">
+		<!-- Command input -->
+		<div class="flex items-center gap-2">
+			<span class="text-vibe-mint">$</span>
+			<span class="text-vibe-muted">idearater --analyze</span>
+		</div>
+
+		<!-- Score output - big and prominent -->
+		{#if showScore}
+			<div class="flex items-baseline gap-3 pl-4" in:scale={{ duration: 400, start: 0.8 }}>
+				<span class="text-5xl font-bold text-vibe-mint">{scoreCard.overallScore}</span>
+				<span class="text-vibe-muted text-lg">/100</span>
+				<span class="text-vibe-muted text-xs ml-2">— {scoreCard.verdict}</span>
 			</div>
-			<p class="text-vibe-muted text-sm italic">"{scoreCard.verdict}"</p>
-		</div>
-	{/if}
+		{/if}
 
-	<!-- Idea (blurred in stealth mode) -->
-	{#if showDetails}
-		<div
-			class="mb-6 p-4 bg-vibe-bg border border-vibe-border"
-			in:fade={{ duration: 300 }}
-		>
-			{#if stealthMode}
-				<p class="text-vibe-muted text-sm mb-1">The Idea:</p>
-				<p class="text-vibe-text blur-sm select-none">{scoreCard.idea}</p>
-				<p class="text-center text-vibe-mint text-xs mt-2">Ask me about my {scoreCard.overallScore}/100 idea 👀</p>
-			{:else}
-				<p class="text-vibe-muted text-sm mb-1">The Idea:</p>
-				<p class="text-vibe-text text-sm">{scoreCard.idea}</p>
-			{/if}
-		</div>
-	{/if}
-
-	<!-- Score Bars -->
-	{#if showDetails}
-		<div class="space-y-4 mb-6" in:fade={{ duration: 300, delay: 100 }}>
-			<ScoreBar label="Problem Clarity" score={scoreCard.dimensions.problemClarity} delay={0} />
-			<ScoreBar label="Market Size" score={scoreCard.dimensions.marketSize} delay={100} />
-			<ScoreBar label="Competition" score={scoreCard.dimensions.competition} delay={200} />
-			<ScoreBar label="Execution" score={scoreCard.dimensions.execution} delay={300} />
-		</div>
-	{/if}
-
-	<!-- YC Verdict -->
-	{#if showDetails}
-		<div
-			class="text-center mb-6 p-4 border"
-			style="border-color: {getYCColor(scoreCard.ycVerdict)}; background: {getYCColor(scoreCard.ycVerdict)}15;"
-			in:fade={{ duration: 300, delay: 500 }}
-		>
-			<div class="text-lg font-bold" style="color: {getYCColor(scoreCard.ycVerdict)}">
-				YC: {scoreCard.ycVerdict} {getYCEmoji(scoreCard.ycVerdict)}
+		{#if showDetails}
+			<!-- Metrics grid - 2x2 for better aspect ratio -->
+			<div class="grid grid-cols-2 gap-x-6 gap-y-2 pl-4 mt-2" in:fade={{ duration: 300 }}>
+				<ScoreBar label="Problem" score={scoreCard.dimensions.problemClarity} delay={0} compact />
+				<ScoreBar label="Market" score={scoreCard.dimensions.marketSize} delay={50} compact />
+				<ScoreBar label="Competition" score={scoreCard.dimensions.competition} delay={100} compact />
+				<ScoreBar label="Execution" score={scoreCard.dimensions.execution} delay={150} compact />
 			</div>
-			<p class="text-vibe-muted text-xs mt-1">{scoreCard.ycReason}</p>
-		</div>
-	{/if}
 
-	<!-- Killer Insight -->
-	{#if showDetails}
-		<div
-			class="p-4 bg-vibe-mint/10 border border-vibe-mint/30"
-			in:fade={{ duration: 300, delay: 700 }}
-		>
-			<div class="flex items-start gap-2">
-				<span class="text-lg">💡</span>
-				<p class="text-vibe-text text-sm italic">"{scoreCard.killerInsight}"</p>
+			<!-- YC Verdict line -->
+			<div class="flex items-center gap-2 pl-4 mt-2" in:fade={{ duration: 300, delay: 200 }}>
+				<span class="text-vibe-muted">YC verdict:</span>
+				<span class={getYCColor(scoreCard.ycVerdict)}>{scoreCard.ycVerdict}</span>
+				<span class="text-vibe-muted text-xs">— {scoreCard.ycReason}</span>
 			</div>
-		</div>
-	{/if}
 
-	<!-- Watermark -->
-	<div class="mt-6 pt-4 border-t border-vibe-border text-center">
-		<span class="text-vibe-muted text-xs">vibeship.ai/idearater</span>
+			<!-- Killer insight as terminal output -->
+			<div class="mt-2 pl-4 border-l-2 border-vibe-mint/50" in:fade={{ duration: 300, delay: 400 }}>
+				{#if stealthMode}
+					<p class="text-vibe-muted text-xs blur-sm">{scoreCard.killerInsight}</p>
+					<p class="text-vibe-mint text-xs mt-1">Ask me about my {scoreCard.overallScore}/100 idea</p>
+				{:else}
+					<p class="text-vibe-text text-xs italic">"{scoreCard.killerInsight}"</p>
+				{/if}
+			</div>
+
+			<!-- Footer with prompt -->
+			<div class="flex items-center gap-2 mt-3 pt-2 border-t border-vibe-border/50">
+				<span class="text-vibe-mint">$</span>
+				<span class="text-vibe-muted text-xs">vibeship.co/idearater</span>
+				<span class="text-vibe-mint animate-pulse">▋</span>
+			</div>
+		{/if}
 	</div>
 </div>
