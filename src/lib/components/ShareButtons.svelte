@@ -1,7 +1,6 @@
 <script lang="ts">
 	import { fade } from 'svelte/transition';
 	import type { ScoreCard } from '$lib/types';
-	import { toPng } from 'html-to-image';
 
 	interface Props {
 		scoreCard: ScoreCard;
@@ -11,13 +10,12 @@
 
 	let { scoreCard, stealthMode, onToggleStealth }: Props = $props();
 	let copying = $state(false);
-	let downloading = $state(false);
 
 	const getShareText = (): string => {
 		if (stealthMode) {
-			return `Ask me about my ${scoreCard.overallScore}/100 startup idea 👀\n\nGet your idea roasted: vibeship.ai/idearater`;
+			return `Ask me about my ${scoreCard.overallScore}/100 startup idea 👀\n\nGet your idea rated: vibeship.co/idearater`;
 		}
-		return `My startup idea scored ${scoreCard.overallScore}/100 on Vibeship IdeaRater\n\n"${scoreCard.killerInsight}"\n\nGet your idea roasted: vibeship.ai/idearater`;
+		return `My startup idea scored ${scoreCard.overallScore}/100 on Vibeship IdeaRater\n\n"${scoreCard.killerInsight}"\n\nGet your idea rated: vibeship.co/idearater`;
 	};
 
 	const shareToX = () => {
@@ -27,54 +25,30 @@
 
 	const shareToLinkedIn = () => {
 		const text = encodeURIComponent(getShareText());
-		window.open(`https://www.linkedin.com/sharing/share-offsite/?url=https://vibeship.ai/idearater&summary=${text}`, '_blank');
+		window.open(`https://www.linkedin.com/sharing/share-offsite/?url=https://vibeship.co/idearater&summary=${text}`, '_blank');
 	};
 
 	const copyLink = async () => {
 		copying = true;
 		try {
-			await navigator.clipboard.writeText(`https://vibeship.ai/idearater?id=${scoreCard.id}`);
+			await navigator.clipboard.writeText(`https://vibeship.co/idearater?id=${scoreCard.id}`);
 			setTimeout(() => copying = false, 2000);
 		} catch {
 			copying = false;
 		}
 	};
-
-	const downloadImage = async () => {
-		downloading = true;
-		try {
-			const element = document.getElementById('scorecard');
-			if (element) {
-				const dataUrl = await toPng(element, {
-					backgroundColor: '#0d1117',
-					pixelRatio: 2
-				});
-				const link = document.createElement('a');
-				link.download = `idearater-${scoreCard.overallScore}.png`;
-				link.href = dataUrl;
-				link.click();
-			}
-		} catch (err) {
-			console.error('Failed to download image:', err);
-		}
-		downloading = false;
-	};
 </script>
 
 <div class="mt-6 space-y-4" in:fade={{ duration: 300, delay: 900 }}>
-	<!-- Stealth Mode Toggle -->
+	<!-- Share buttons - all in one row -->
 	<div class="flex items-center justify-center gap-3">
 		<button
 			onclick={() => onToggleStealth()}
 			class="flex items-center gap-2 px-4 py-2 border transition-all {stealthMode ? 'bg-vibe-mint/20 border-vibe-mint text-vibe-mint' : 'bg-vibe-surface border-vibe-border text-vibe-muted hover:border-vibe-mint/50'}"
 		>
-			<span>{stealthMode ? '🕶️' : '👁️'}</span>
-			<span class="text-sm">{stealthMode ? 'Stealth Mode' : 'Public Mode'}</span>
+			<span class="text-sm">{stealthMode ? 'Stealth' : 'Public'}</span>
 		</button>
-	</div>
 
-	<!-- Share buttons -->
-	<div class="flex flex-wrap justify-center gap-3">
 		<button
 			onclick={shareToX}
 			class="flex items-center gap-2 px-4 py-2 bg-vibe-surface border border-vibe-border hover:border-vibe-mint/50 hover:bg-vibe-mint/10 transition-all text-vibe-text"
@@ -82,7 +56,7 @@
 			<svg class="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
 				<path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
 			</svg>
-			<span class="text-sm">Share to X</span>
+			<span class="text-sm">Share</span>
 		</button>
 
 		<button
@@ -96,19 +70,9 @@
 		</button>
 
 		<button
-			onclick={downloadImage}
-			disabled={downloading}
-			class="flex items-center gap-2 px-4 py-2 bg-vibe-surface border border-vibe-border hover:border-vibe-mint/50 hover:bg-vibe-mint/10 transition-all text-vibe-text disabled:opacity-50"
-		>
-			<span>{downloading ? '⏳' : '📷'}</span>
-			<span class="text-sm">{downloading ? 'Saving...' : 'Download'}</span>
-		</button>
-
-		<button
 			onclick={copyLink}
 			class="flex items-center gap-2 px-4 py-2 bg-vibe-surface border border-vibe-border hover:border-vibe-mint/50 hover:bg-vibe-mint/10 transition-all text-vibe-text"
 		>
-			<span>{copying ? '✓' : '🔗'}</span>
 			<span class="text-sm">{copying ? 'Copied!' : 'Copy Link'}</span>
 		</button>
 	</div>

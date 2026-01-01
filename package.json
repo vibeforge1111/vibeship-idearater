@@ -23,7 +23,6 @@
 		"vite": "^7.2.6"
 	},
 	"dependencies": {
-		"@anthropic-ai/sdk": "^0.71.2",
-		"html-to-image": "^1.11.13"
+		"@anthropic-ai/sdk": "^0.71.2"
 	}
 }
