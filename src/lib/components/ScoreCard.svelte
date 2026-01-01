@@ -14,7 +14,20 @@
 	let showDetails = $state(false);
 	let typedText = $state('');
 	let isTyping = $state(true);
+	let showPmfTooltip = $state(false);
 	const fullText = 'idearater.vibeship.co';
+
+	// Tooltips for each dimension
+	const tooltips = {
+		problem: 'Is this a real, painful problem people have? How urgent is the need?',
+		market: 'How big is the potential market? Is it growing?',
+		solution: 'Does your solution actually solve the problem well?',
+		timing: 'Is now the right time for this? Are conditions favorable?',
+		uniqueness: 'What makes this different from existing solutions?',
+		businessModel: 'Is there a clear path to revenue? Will people pay?',
+		scalability: 'Can this grow without proportional cost increases?',
+		defensibility: "What's your moat? Can competitors easily copy this?"
+	};
 
 	const getYCIcon = (verdict: string): string => {
 		switch (verdict) {
@@ -69,12 +82,24 @@
 		<div class="flex flex-col lg:flex-row gap-5 mb-5">
 			<!-- PMF Score -->
 			{#if showScore}
-				<div class="flex-shrink-0 p-3 bg-vibe-mint/5 border border-vibe-mint/30" in:scale={{ duration: 400, start: 0.8 }}>
-					<p class="text-vibe-mint text-xs mb-2">PMF Score</p>
+				<div
+					class="flex-shrink-0 p-3 bg-vibe-mint/5 border border-vibe-mint/30 relative"
+					in:scale={{ duration: 400, start: 0.8 }}
+					onmouseenter={() => showPmfTooltip = true}
+					onmouseleave={() => showPmfTooltip = false}
+				>
+					<p class="text-vibe-mint text-xs mb-2 cursor-help">PMF Score</p>
 					<div class="flex flex-col items-center">
 						<span class="text-5xl font-bold text-vibe-mint">{scoreCard.pmfScore}</span>
 						<span class="text-vibe-muted text-base">/100</span>
 					</div>
+					{#if showPmfTooltip}
+						<div class="absolute top-full left-0 mt-2 px-3 py-2 bg-vibe-surface border border-vibe-border text-xs text-vibe-text whitespace-normal w-64 z-50 shadow-lg">
+							<span class="text-vibe-mint font-semibold">Product-Market Fit Score</span><br/>
+							A weighted score measuring how well your idea matches market needs. Higher scores indicate stronger potential for success.
+							<div class="absolute bottom-full left-4 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-vibe-border"></div>
+						</div>
+					{/if}
 				</div>
 			{/if}
 
@@ -109,14 +134,14 @@
 			<div class="p-5 bg-vibe-bg border border-vibe-border mb-4" in:fade={{ duration: 300, delay: 100 }}>
 				<p class="text-vibe-muted text-xs mb-4">Breakdown</p>
 				<div class="grid grid-cols-2 gap-x-10 gap-y-4">
-					<ScoreBar label="Problem" score={scoreCard.dimensions.problem} delay={0} />
-					<ScoreBar label="Uniqueness" score={scoreCard.dimensions.uniqueness} delay={50} />
-					<ScoreBar label="Market" score={scoreCard.dimensions.market} delay={100} />
-					<ScoreBar label="Business Model" score={scoreCard.dimensions.businessModel} delay={150} />
-					<ScoreBar label="Solution" score={scoreCard.dimensions.solution} delay={200} />
-					<ScoreBar label="Scalability" score={scoreCard.dimensions.scalability} delay={250} />
-					<ScoreBar label="Timing" score={scoreCard.dimensions.timing} delay={300} />
-					<ScoreBar label="Defensibility" score={scoreCard.dimensions.defensibility} delay={350} />
+					<ScoreBar label="Problem" score={scoreCard.dimensions.problem} delay={0} tooltip={tooltips.problem} />
+					<ScoreBar label="Uniqueness" score={scoreCard.dimensions.uniqueness} delay={50} tooltip={tooltips.uniqueness} />
+					<ScoreBar label="Market" score={scoreCard.dimensions.market} delay={100} tooltip={tooltips.market} />
+					<ScoreBar label="Business Model" score={scoreCard.dimensions.businessModel} delay={150} tooltip={tooltips.businessModel} />
+					<ScoreBar label="Solution" score={scoreCard.dimensions.solution} delay={200} tooltip={tooltips.solution} />
+					<ScoreBar label="Scalability" score={scoreCard.dimensions.scalability} delay={250} tooltip={tooltips.scalability} />
+					<ScoreBar label="Timing" score={scoreCard.dimensions.timing} delay={300} tooltip={tooltips.timing} />
+					<ScoreBar label="Defensibility" score={scoreCard.dimensions.defensibility} delay={350} tooltip={tooltips.defensibility} />
 				</div>
 			</div>
 
