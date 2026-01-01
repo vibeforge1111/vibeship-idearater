@@ -1,6 +1,5 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
-	import { fade } from 'svelte/transition';
 
 	const steps: string[] = [
 		'Analyzing the problem',
@@ -54,10 +53,16 @@
 			clearInterval(cursorInterval);
 		};
 	});
+
+	const getIcon = (i: number): string => {
+		if (completedSteps.includes(i)) return '✓';
+		if (i === currentStep) return '~';
+		return ' ';
+	};
 </script>
 
 <div class="flex flex-col items-center justify-center min-h-[70vh] py-8">
-	<div class="terminal-box w-full max-w-md min-h-[420px]">
+	<div class="terminal-box w-full max-w-md">
 		<!-- Terminal window header with dots -->
 		<div class="flex items-center gap-2 px-4 py-3 border-b border-vibe-border bg-vibe-bg">
 			<div class="w-3 h-3 rounded-full bg-vibe-red"></div>
@@ -68,9 +73,9 @@
 
 		<div class="p-6">
 			<!-- Terminal command line -->
-			<div class="flex items-center gap-2 mb-6 pb-4 border-b border-vibe-border/50">
+			<div class="flex items-center gap-2 mb-6 pb-4 border-b border-vibe-border/50 h-8">
 				<span class="text-vibe-mint">$</span>
-				<span class="text-vibe-mint font-mono text-sm">{typedText}</span>
+				<span class="text-vibe-mint font-mono text-sm min-w-[110px]">{typedText}</span>
 				{#if showCursor}
 					<span class="text-vibe-mint font-mono">█</span>
 				{:else}
@@ -82,23 +87,23 @@
 			<div class="space-y-2.5">
 				{#each steps as step, i}
 					<div
-						class="flex items-center gap-3 transition-all duration-300 font-mono text-sm"
+						class="flex items-center gap-3 font-mono text-sm h-6"
 						class:opacity-30={i > currentStep}
 						class:opacity-100={i <= currentStep}
 					>
-						{#if completedSteps.includes(i)}
-							<span class="text-vibe-mint w-6" in:fade={{ duration: 150 }}>[✓]</span>
-						{:else if i === currentStep}
-							<span class="text-vibe-mint w-6 animate-pulse">[~]</span>
-						{:else}
-							<span class="text-vibe-muted w-6">[ ]</span>
-						{/if}
+						<span
+							class="w-8 text-center flex-shrink-0"
+							class:text-vibe-mint={i <= currentStep}
+							class:text-vibe-muted={i > currentStep}
+							class:animate-pulse={i === currentStep}
+						>[{getIcon(i)}]</span>
 
 						<span
+							class="flex-1"
 							class:text-vibe-text={i <= currentStep}
 							class:text-vibe-muted={i > currentStep}
 						>
-							{step}{i === currentStep ? '...' : ''}
+							{step}
 						</span>
 					</div>
 				{/each}
