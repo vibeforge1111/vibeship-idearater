@@ -72,17 +72,18 @@
 			<AnalysisAnimation />
 		</div>
 	{:else if appState === 'result' && scoreCard}
-		<div class="max-w-2xl mx-auto px-4" in:fade={{ duration: 300 }}>
+		<div class="max-w-2xl mx-auto px-4 pt-8 sm:pt-12" in:fade={{ duration: 300 }}>
+			<p class="text-vibe-muted text-xs text-center mb-4">Screenshot your scorecard and share it. Use stealth mode to hide your idea.</p>
 			<ScoreCard {scoreCard} {stealthMode} />
 
 			<!-- Share and actions row -->
-			<div class="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+			<div class="mt-6 flex items-center justify-between gap-2 flex-wrap">
 				<ShareButtons {scoreCard} {stealthMode} onToggleStealth={toggleStealth} />
 				<button
 					onclick={handleReset}
-					class="inline-flex items-center gap-2 px-5 py-2 bg-vibe-surface border border-vibe-border hover:border-vibe-mint/50 hover:bg-vibe-mint/10 transition-all text-vibe-text text-sm"
+					class="px-3 py-2 bg-vibe-surface border border-vibe-border hover:border-vibe-mint/50 hover:bg-vibe-mint/10 transition-all text-vibe-text text-sm"
 				>
-					<span>Rate Another Idea</span>
+					Rate Another Idea
 				</button>
 			</div>
 

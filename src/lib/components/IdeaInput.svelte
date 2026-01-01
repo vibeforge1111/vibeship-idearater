@@ -9,21 +9,10 @@
 	let idea = $state('');
 	let isFocused = $state(false);
 
-	const exampleIdeas = [
-		"An AI that writes personalized bedtime stories for kids based on their day",
-		"A marketplace for people to rent out their backyards for camping",
-		"A browser extension that summarizes any YouTube video in 30 seconds",
-		"An app that matches remote workers with cafes that have good wifi"
-	];
-
 	const handleSubmit = () => {
 		if (idea.trim()) {
 			onSubmit(idea.trim());
 		}
-	};
-
-	const handleExample = (example: string) => {
-		idea = example;
 	};
 
 	const handleKeydown = (e: KeyboardEvent) => {
@@ -33,7 +22,7 @@
 	};
 </script>
 
-<div class="max-w-2xl mx-auto px-4" in:fade={{ duration: 300 }}>
+<div class="max-w-2xl mx-auto px-4 pt-12 sm:pt-32" in:fade={{ duration: 300 }}>
 	<!-- Header -->
 	<div class="text-center mb-12">
 		<h1 class="text-4xl sm:text-5xl font-bold mb-4">
@@ -41,7 +30,7 @@
 			<span class="text-vibe-text"> IdeaRater</span>
 		</h1>
 		<p class="text-vibe-muted text-lg">
-			Get roasted. Get better. Get building.
+			Test if your idea has PMF potential.
 		</p>
 	</div>
 
@@ -77,24 +66,9 @@
 		</button>
 	</div>
 
-	<!-- Example ideas -->
-	<div class="mt-8">
-		<p class="text-vibe-muted text-sm text-center mb-4">Try an example:</p>
-		<div class="flex flex-wrap justify-center gap-2">
-			{#each exampleIdeas as example, i}
-				<button
-					onclick={() => handleExample(example)}
-					class="px-3 py-1.5 text-xs bg-vibe-surface border border-vibe-border text-vibe-muted hover:text-vibe-text hover:border-vibe-mint/50 transition-all truncate max-w-[200px]"
-					in:fade={{ duration: 200, delay: i * 50 }}
-				>
-					{example.slice(0, 40)}...
-				</button>
-			{/each}
-		</div>
-	</div>
-
 	<!-- Footer -->
-	<div class="mt-12 text-center text-vibe-muted text-xs">
+	<div class="mt-12 text-center text-vibe-muted text-xs space-y-2">
+		<p>PMF = Product-Market Fit</p>
 		<p>No signup. No email. Just brutal honesty.</p>
 	</div>
 </div>

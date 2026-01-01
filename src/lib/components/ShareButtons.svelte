@@ -50,9 +50,9 @@
 <div class="flex items-center gap-2 flex-wrap" in:fade={{ duration: 300, delay: 500 }}>
 	<button
 		onclick={() => onToggleStealth()}
-		class="flex items-center gap-2 px-3 py-2 border transition-all text-sm {stealthMode ? 'bg-vibe-mint/20 border-vibe-mint text-vibe-mint' : 'bg-vibe-surface border-vibe-border text-vibe-muted hover:border-vibe-mint/50'}"
+		class="flex items-center gap-2 px-3 py-2 border transition-all text-sm font-mono {stealthMode ? 'bg-vibe-yc/20 border-vibe-yc text-vibe-yc' : 'bg-vibe-surface border-vibe-border text-vibe-muted hover:border-vibe-yc/50 hover:text-vibe-yc'}"
 	>
-		{stealthMode ? 'Stealth' : 'Public'}
+		<span class="text-vibe-yc">[</span>{stealthMode ? 'stealth: on' : 'stealth: off'}<span class="text-vibe-yc">]</span>
 	</button>
 
 	<button
