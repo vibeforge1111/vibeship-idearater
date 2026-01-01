@@ -72,21 +72,21 @@
 			<AnalysisAnimation />
 		</div>
 	{:else if appState === 'result' && scoreCard}
-		<div class="max-w-lg mx-auto px-4" in:fade={{ duration: 300 }}>
+		<div class="max-w-2xl mx-auto px-4" in:fade={{ duration: 300 }}>
 			<ScoreCard {scoreCard} {stealthMode} />
-			<ShareButtons {scoreCard} {stealthMode} onToggleStealth={toggleStealth} />
-			<SpawnerRecommendations {scoreCard} />
 
-			<!-- Rate another idea -->
-			<div class="mt-8 text-center">
+			<!-- Share and actions row -->
+			<div class="mt-6 flex flex-col sm:flex-row items-center justify-between gap-4">
+				<ShareButtons {scoreCard} {stealthMode} onToggleStealth={toggleStealth} />
 				<button
 					onclick={handleReset}
-					class="inline-flex items-center gap-2 px-6 py-3 bg-vibe-surface border border-vibe-border hover:border-vibe-mint/50 hover:bg-vibe-mint/10 transition-all text-vibe-text"
+					class="inline-flex items-center gap-2 px-5 py-2 bg-vibe-surface border border-vibe-border hover:border-vibe-mint/50 hover:bg-vibe-mint/10 transition-all text-vibe-text text-sm"
 				>
-					<span>🔄</span>
 					<span>Rate Another Idea</span>
 				</button>
 			</div>
+
+			<SpawnerRecommendations {scoreCard} />
 		</div>
 	{/if}
 </main>
