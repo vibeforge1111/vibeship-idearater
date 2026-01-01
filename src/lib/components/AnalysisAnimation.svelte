@@ -3,11 +3,15 @@
 	import { fade } from 'svelte/transition';
 
 	const steps: string[] = [
-		'Finding your customers',
+		'Analyzing the problem',
 		'Sizing your market',
-		'Scanning competitors',
-		'Checking YC fit',
-		'Generating verdict'
+		'Evaluating solution fit',
+		'Checking timing',
+		'Assessing uniqueness',
+		'Modeling revenue',
+		'Testing scalability',
+		'Building your moat',
+		'Generating PMF score'
 	];
 
 	let currentStep = $state(0);
@@ -19,7 +23,7 @@
 				completedSteps = [...completedSteps, currentStep];
 				currentStep++;
 			}
-		}, 1800);
+		}, 1000); // Faster for 9 steps
 
 		return () => clearInterval(interval);
 	});

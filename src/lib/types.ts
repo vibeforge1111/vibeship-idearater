@@ -1,13 +1,17 @@
 export interface ScoreCard {
 	id: string;
 	idea: string;
-	overallScore: number;
+	pmfScore: number; // Overall PMF Potential score (average of all dimensions)
 	verdict: string;
 	dimensions: {
-		problemClarity: number;
-		marketSize: number;
-		competition: number;
-		execution: number;
+		problem: number; // How real and painful is the problem?
+		market: number; // How big is the opportunity?
+		solution: number; // Does the solution fit the problem?
+		timing: number; // Is the market ready now?
+		uniqueness: number; // What's differentiated vs alternatives?
+		businessModel: number; // Clear path to revenue?
+		scalability: number; // Can it grow efficiently?
+		moat: number; // Can they build defensibility?
 	};
 	ycVerdict: 'YES' | 'MAYBE' | 'PASS';
 	ycReason: string;

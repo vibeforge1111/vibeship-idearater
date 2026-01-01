@@ -12,6 +12,8 @@
 	let { scoreCard, stealthMode = false }: Props = $props();
 	let showScore = $state(false);
 	let showDetails = $state(false);
+	let typedText = $state('');
+	const fullText = 'vibeship.co/idearater';
 
 	const getYCIcon = (verdict: string): string => {
 		switch (verdict) {
@@ -34,6 +36,19 @@
 	onMount(() => {
 		setTimeout(() => showScore = true, 300);
 		setTimeout(() => showDetails = true, 800);
+
+		// Start typing animation after details show
+		setTimeout(() => {
+			let i = 0;
+			const typeInterval = setInterval(() => {
+				if (i < fullText.length) {
+					typedText = fullText.slice(0, i + 1);
+					i++;
+				} else {
+					clearInterval(typeInterval);
+				}
+			}, 50);
+		}, 1200);
 	});
 </script>
 
@@ -46,81 +61,71 @@
 		<span class="ml-3 text-vibe-muted text-sm">vibeship idearater</span>
 	</div>
 
-	<!-- Main content with two-column layout -->
-	<div class="p-6 sm:p-8">
-		<!-- Command prompt -->
-		<div class="flex items-center gap-3 mb-6">
-			<span class="text-vibe-mint text-lg">$</span>
-			<span class="text-vibe-muted">idearater --analyze</span>
-		</div>
-
-		<!-- Two column layout: Left content, Right breakdown -->
-		<div class="flex flex-col lg:flex-row gap-8">
-			<!-- Left column: Score, Idea, YC, Insight -->
-			<div class="flex-1 min-w-0">
-				<!-- Big Score - prominent and readable -->
-				{#if showScore}
-					<div class="mb-6" in:scale={{ duration: 400, start: 0.8 }}>
-						<div class="flex items-baseline gap-4">
-							<span class="text-6xl sm:text-7xl font-bold text-vibe-mint">{scoreCard.overallScore}</span>
-							<span class="text-vibe-muted text-xl">/100</span>
-						</div>
-						<p class="text-vibe-muted text-base mt-2">{scoreCard.verdict}</p>
+	<!-- Main content - horizontal layout -->
+	<div class="p-5">
+		<!-- Top row: Score + Verdict + Insight -->
+		<div class="flex flex-col lg:flex-row gap-5 mb-5">
+			<!-- PMF Score -->
+			{#if showScore}
+				<div class="flex-shrink-0" in:scale={{ duration: 400, start: 0.8 }}>
+					<div class="flex items-baseline gap-2">
+						<span class="text-5xl font-bold text-vibe-mint">{scoreCard.pmfScore}</span>
+						<span class="text-vibe-muted text-lg">/100</span>
 					</div>
-				{/if}
+					<p class="text-vibe-muted text-xs">PMF Potential</p>
+				</div>
+			{/if}
 
-				{#if showDetails}
-					<!-- The Idea -->
-					{#if !stealthMode}
-						<div class="mb-6 p-4 bg-vibe-bg border border-vibe-border" in:fade={{ duration: 300 }}>
-							<p class="text-vibe-muted text-xs mb-2">The Idea</p>
-							<p class="text-vibe-text text-sm leading-relaxed">{scoreCard.idea}</p>
-						</div>
-					{:else}
-						<div class="mb-6 p-4 bg-vibe-bg border border-vibe-border" in:fade={{ duration: 300 }}>
-							<p class="text-vibe-mint text-sm">Ask me about my {scoreCard.overallScore}/100 idea</p>
-						</div>
-					{/if}
-
-					<!-- YC Verdict -->
-					<div class="mb-6 p-4 bg-vibe-bg border border-vibe-border" in:fade={{ duration: 300, delay: 400 }}>
-						<div class="flex items-center gap-3 mb-2">
-							<span class="text-vibe-muted text-xs">YC Verdict:</span>
-							<span class="{getYCColor(scoreCard.ycVerdict)} font-mono text-sm">[{getYCIcon(scoreCard.ycVerdict)}]</span>
-							<span class="text-vibe-text font-bold text-sm">{scoreCard.ycVerdict}</span>
-						</div>
-						<p class="text-vibe-muted text-sm">{scoreCard.ycReason}</p>
-					</div>
-
-					<!-- Killer Insight -->
-					<div class="p-4 bg-vibe-mint/10 border-l-4 border-vibe-mint" in:fade={{ duration: 300, delay: 600 }}>
-						<p class="text-vibe-muted text-xs mb-2">Key Insight</p>
-						<p class="text-vibe-text text-sm leading-relaxed">"{scoreCard.killerInsight}"</p>
-					</div>
-				{/if}
-			</div>
-
-			<!-- Right column: Breakdown -->
 			{#if showDetails}
-				<div class="lg:w-64 flex-shrink-0" in:fade={{ duration: 300, delay: 100 }}>
-					<div class="p-4 bg-vibe-bg border border-vibe-border h-full">
-						<p class="text-vibe-muted text-xs mb-4">Breakdown</p>
-						<div class="space-y-4">
-							<ScoreBar label="Problem Clarity" score={scoreCard.dimensions.problemClarity} delay={0} />
-							<ScoreBar label="Market Size" score={scoreCard.dimensions.marketSize} delay={100} />
-							<ScoreBar label="Competition" score={scoreCard.dimensions.competition} delay={200} />
-							<ScoreBar label="Execution" score={scoreCard.dimensions.execution} delay={300} />
-						</div>
+				<!-- The Idea -->
+				{#if !stealthMode}
+					<div class="flex-1 p-3 bg-vibe-bg border border-vibe-border" in:fade={{ duration: 300 }}>
+						<p class="text-vibe-muted text-xs mb-1">The Idea</p>
+						<p class="text-vibe-text text-sm leading-snug">{scoreCard.idea}</p>
 					</div>
+				{:else}
+					<div class="flex-1 p-3 bg-vibe-bg border border-vibe-border" in:fade={{ duration: 300 }}>
+						<p class="text-vibe-mint text-sm">Ask me about my {scoreCard.pmfScore}/100 idea</p>
+					</div>
+				{/if}
+
+				<!-- YC Verdict -->
+				<div class="flex-shrink-0 p-3 bg-vibe-bg border border-vibe-border" in:fade={{ duration: 300, delay: 200 }}>
+					<div class="flex items-center gap-2 mb-1">
+						<span class="{getYCColor(scoreCard.ycVerdict)} font-mono text-sm">[{getYCIcon(scoreCard.ycVerdict)}]</span>
+						<span class="text-vibe-text font-bold text-sm">YC: {scoreCard.ycVerdict}</span>
+					</div>
+					<p class="text-vibe-muted text-xs max-w-48">{scoreCard.ycReason}</p>
 				</div>
 			{/if}
 		</div>
 
-		<!-- Footer -->
 		{#if showDetails}
-			<div class="flex items-center gap-3 mt-6 pt-4 border-t border-vibe-border">
+			<!-- Breakdown - 2 columns of 4 bars each for width -->
+			<div class="p-5 bg-vibe-bg border border-vibe-border mb-4" in:fade={{ duration: 300, delay: 100 }}>
+				<p class="text-vibe-muted text-xs mb-4">Breakdown</p>
+				<div class="grid grid-cols-2 gap-x-10 gap-y-4">
+					<ScoreBar label="Problem" score={scoreCard.dimensions.problem} delay={0} />
+					<ScoreBar label="Uniqueness" score={scoreCard.dimensions.uniqueness} delay={50} />
+					<ScoreBar label="Market" score={scoreCard.dimensions.market} delay={100} />
+					<ScoreBar label="Business Model" score={scoreCard.dimensions.businessModel} delay={150} />
+					<ScoreBar label="Solution" score={scoreCard.dimensions.solution} delay={200} />
+					<ScoreBar label="Scalability" score={scoreCard.dimensions.scalability} delay={250} />
+					<ScoreBar label="Timing" score={scoreCard.dimensions.timing} delay={300} />
+					<ScoreBar label="Moat" score={scoreCard.dimensions.moat} delay={350} />
+				</div>
+			</div>
+
+			<!-- Key Insight -->
+			<div class="p-3 bg-vibe-mint/10 border-l-4 border-vibe-mint mb-4" in:fade={{ duration: 300, delay: 400 }}>
+				<p class="text-vibe-muted text-xs mb-1">Key Insight</p>
+				<p class="text-vibe-text text-sm">"{scoreCard.killerInsight}"</p>
+			</div>
+
+			<!-- Footer with typing animation -->
+			<div class="flex items-center gap-3 pt-3 border-t border-vibe-border">
 				<span class="text-vibe-mint">$</span>
-				<span class="text-vibe-muted text-sm">vibeship.co/idearater</span>
+				<span class="text-vibe-muted text-sm font-mono">{typedText}</span>
 				<span class="text-vibe-mint animate-pulse">▋</span>
 			</div>
 		{/if}

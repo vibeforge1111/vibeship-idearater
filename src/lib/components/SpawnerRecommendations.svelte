@@ -9,10 +9,14 @@
 	let { scoreCard }: Props = $props();
 
 	const weaknessLabels: Record<string, string> = {
-		problemClarity: 'Problem Discovery',
-		marketSize: 'Market Research',
-		competition: 'Competitor Analysis',
-		execution: 'MVP Planning'
+		problem: 'Problem Discovery',
+		market: 'Market Research',
+		solution: 'Solution Validation',
+		timing: 'Market Timing Analysis',
+		uniqueness: 'Differentiation Strategy',
+		businessModel: 'Revenue Model Design',
+		scalability: 'Growth Strategy',
+		moat: 'Defensibility Planning'
 	};
 
 	const getWeakness = (): string => {

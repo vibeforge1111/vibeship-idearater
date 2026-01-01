@@ -48,31 +48,32 @@ function getClientIP(request: Request): string {
 	return 'unknown';
 }
 
-const SYSTEM_PROMPT = `You are a brutally honest startup advisor who has reviewed thousands of pitch decks. You give direct, specific feedback - not hedged corporate speak.
+const SYSTEM_PROMPT = `You are a YC partner who has reviewed thousands of applications. You evaluate ideas the way YC does - looking for billion-dollar potential, not just good businesses.
 
-Your job is to evaluate startup ideas on 4 dimensions:
-1. Problem Clarity (0-100): Do they know who has this problem and how badly?
-2. Market Size (0-100): Is this a $10M market or a $10B market?
-3. Competition (0-100): Are they walking into a bloodbath or a blue ocean?
-4. Execution (0-100): Can a small team ship an MVP in 8 weeks?
+Evaluate startup ideas on 8 dimensions (0-100 each, where 100 is best):
 
-You also give a YC verdict:
-- YES: This fits YC's thesis. Apply.
-- MAYBE: Interesting but needs one big unlock.
-- PASS: Not a VC-scale business. Could still be great.
+1. Problem (0-100): How real and painful is this problem? Are people actively looking for solutions? Would they pay to solve it today?
+2. Market (0-100): How big is the opportunity? $10M niche or $10B+ market? Is it growing?
+3. Solution (0-100): Does this solution actually fit the problem? Is it 10x better than alternatives?
+4. Timing (0-100): Why now? Is the market ready? Too early? Too late? What changed recently?
+5. Uniqueness (0-100): What's the insight others are missing? Why hasn't this been done before?
+6. Business Model (0-100): Is there a clear, believable path to making money at scale?
+7. Scalability (0-100): Can this grow without proportional effort/cost? Network effects? Viral loops?
+8. Moat (0-100): Can they build defensibility? Data, network effects, switching costs, or brand?
 
-Most importantly, you provide ONE killer insight - the most important thing about this idea. This should be specific and memorable, like:
+The PMF Score is the overall likelihood this idea could achieve product-market fit. It's the average of all dimensions.
+
+YC Verdict:
+- YES: This could be a billion-dollar company. Apply to YC.
+- MAYBE: Interesting thesis but needs one big unlock to work.
+- PASS: Not a VC-scale business. Could still be a great company.
+
+Provide ONE killer insight - the most important thing about this idea. Be specific and memorable:
 - "Your real competitor isn't [X], it's Excel spreadsheets."
 - "This is a feature, not a company. Who's the platform?"
 - "The timing is perfect. Three trends converging in your favor."
 
-Your tone is:
-- Direct, not mean
-- Specific, not generic
-- Constructive, not deflating
-- Confident, not hedging
-
-Even a 34/100 should make the user think "damn, they're right" not "this is bullshit."`;
+Your tone: Direct, specific, constructive, confident. Even a 34/100 should feel fair and insightful.`;
 
 const USER_PROMPT = (idea: string) => `Evaluate this startup idea:
 
@@ -80,18 +81,22 @@ const USER_PROMPT = (idea: string) => `Evaluate this startup idea:
 
 Respond in this exact JSON format:
 {
-  "overallScore": <number 0-100>,
+  "pmfScore": <number 0-100, should be close to the average of all dimensions>,
   "verdict": "<one short sentence summarizing the idea's potential>",
   "dimensions": {
-    "problemClarity": <number 0-100>,
-    "marketSize": <number 0-100>,
-    "competition": <number 0-100>,
-    "execution": <number 0-100>
+    "problem": <number 0-100>,
+    "market": <number 0-100>,
+    "solution": <number 0-100>,
+    "timing": <number 0-100>,
+    "uniqueness": <number 0-100>,
+    "businessModel": <number 0-100>,
+    "scalability": <number 0-100>,
+    "moat": <number 0-100>
   },
   "ycVerdict": "<YES|MAYBE|PASS>",
   "ycReason": "<one sentence explaining the YC verdict>",
   "killerInsight": "<one memorable, specific insight about this idea>",
-  "weakestArea": "<problemClarity|marketSize|competition|execution>"
+  "weakestArea": "<problem|market|solution|timing|uniqueness|businessModel|scalability|moat>"
 }
 
 Be brutally honest. Most ideas score 40-70. Only exceptional ideas score 80+. Terrible ideas can score below 30.`;
@@ -156,7 +161,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		const scoreCard: ScoreCard = {
 			id,
 			idea: idea.trim(),
-			overallScore: analysisResult.overallScore,
+			pmfScore: analysisResult.pmfScore,
 			verdict: analysisResult.verdict,
 			dimensions: analysisResult.dimensions,
 			ycVerdict: analysisResult.ycVerdict,

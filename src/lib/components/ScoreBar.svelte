@@ -66,11 +66,11 @@
 		class:opacity-100={visible}
 		class:translate-y-0={visible}
 	>
-		<div class="flex justify-between items-center mb-1">
+		<div class="flex justify-between items-center mb-1.5">
 			<span class="text-sm text-vibe-muted">{label}</span>
-			<span class="text-sm font-semibold" style="color: {getScoreColor(score)}">{animatedScore}</span>
+			<span class="text-sm font-bold" style="color: {getScoreColor(score)}">{animatedScore}</span>
 		</div>
-		<div class="h-1 bg-vibe-border overflow-hidden">
+		<div class="h-2 bg-vibe-border overflow-hidden">
 			<div
 				class="h-full transition-all duration-700 ease-out"
 				style="width: {visible ? score : 0}%; background: {getScoreColor(score)};"
