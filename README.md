@@ -2,6 +2,8 @@
 
 Test if your startup idea has PMF (Product-Market Fit) potential. Get a brutally honest scorecard in 30 seconds.
 
+**Free to use. Powered by Anthropic Claude.**
+
 **[Try it live at idearater.vibeship.co](https://idearater.vibeship.co)**
 
 ![Vibeship IdeaRater Landing Page](docs/landing.png)
