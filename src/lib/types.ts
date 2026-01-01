@@ -12,7 +12,7 @@ export interface ScoreCard {
 		uniqueness: number; // What's differentiated vs alternatives?
 		businessModel: number; // Clear path to revenue?
 		scalability: number; // Can it grow efficiently?
-		moat: number; // Can they build defensibility?
+		defensibility: number; // Can they protect from competitors?
 	};
 	ycVerdict: 'YES' | 'MAYBE' | 'PASS';
 	ycReason: string;

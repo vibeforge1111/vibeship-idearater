@@ -12,10 +12,17 @@
 	let copying = $state(false);
 
 	const getShareText = (): string => {
+		const score = scoreCard.pmfScore;
+
 		if (stealthMode) {
-			return `Ask me about my ${scoreCard.overallScore}/100 startup idea 👀\n\nGet your idea rated: vibeship.co/idearater`;
+			if (score >= 70) return `My startup idea just scored ${score}/100. Feeling dangerous.\n\nThink yours can beat it? → vibeship.co/idearater`;
+			if (score >= 50) return `${score}/100 on the IdeaRater. Not bad, not done.\n\nWhat's your score? → vibeship.co/idearater`;
+			return `${score}/100. Brutal, but fair.\n\nGet roasted too → vibeship.co/idearater`;
 		}
-		return `My startup idea scored ${scoreCard.overallScore}/100 on Vibeship IdeaRater\n\n"${scoreCard.killerInsight}"\n\nGet your idea rated: vibeship.co/idearater`;
+
+		if (score >= 70) return `${score}/100 PMF score. The idea hits.\n\nRate yours → vibeship.co/idearater`;
+		if (score >= 50) return `${score}/100. Room to grow, but there's something here.\n\nGet your score → vibeship.co/idearater`;
+		return `${score}/100. Back to the drawing board.\n\nHow bad is yours? → vibeship.co/idearater`;
 	};
 
 	const shareToX = () => {

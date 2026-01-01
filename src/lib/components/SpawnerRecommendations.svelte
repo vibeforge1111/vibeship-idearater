@@ -86,11 +86,11 @@
 			"Where are the network effects?",
 			"Think leverage. Think systems.",
 		],
-		moat: [
+		defensibility: [
 			"What stops copycats?",
-			"Build defensibility early.",
+			"Build your barriers early.",
 			"Where's the compounding advantage?",
-			"Moats take time. Start now.",
+			"Protection takes time. Start now.",
 		],
 	};
 
@@ -155,12 +155,15 @@
 		href="https://spawner.vibeship.co"
 		target="_blank"
 		rel="noopener noreferrer"
-		class="flex items-center justify-between p-4 bg-vibe-surface border border-vibe-border hover:border-vibe-mint/50 hover:bg-vibe-mint/5 transition-all group"
+		class="block p-4 bg-vibe-surface border border-vibe-border hover:border-vibe-mint/50 hover:bg-vibe-mint/5 transition-all group"
 	>
-		<div class="flex items-center gap-2">
-			<span class="text-vibe-text text-sm">{recommendation.headline}</span>
-			<span class="text-vibe-muted text-sm">{recommendation.subtext}</span>
+		<div class="flex items-center justify-between mb-2">
+			<div class="flex items-center gap-2">
+				<span class="text-vibe-text text-sm font-medium">{recommendation.headline}</span>
+				<span class="text-vibe-muted text-sm">{recommendation.subtext}</span>
+			</div>
+			<span class="text-vibe-muted group-hover:text-vibe-mint transition-colors">→</span>
 		</div>
-		<span class="text-vibe-muted group-hover:text-vibe-mint transition-colors">→</span>
+		<p class="text-vibe-muted text-xs">Use Spawner with 450+ Claude skills to build, launch, and scale your idea. Free.</p>
 	</a>
 </div>

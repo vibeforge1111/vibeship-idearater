@@ -59,7 +59,7 @@ Evaluate startup ideas on 8 dimensions (0-100 each, where 100 is best):
 5. Uniqueness (0-100): What's the insight others are missing? Why hasn't this been done before?
 6. Business Model (0-100): Is there a clear, believable path to making money at scale?
 7. Scalability (0-100): Can this grow without proportional effort/cost? Network effects? Viral loops?
-8. Moat (0-100): Can they build defensibility? Data, network effects, switching costs, or brand?
+8. Defensibility (0-100): Can they protect from competitors? Data, network effects, switching costs, or brand?
 
 The PMF Score is the overall likelihood this idea could achieve product-market fit. It's the average of all dimensions.
 
@@ -92,12 +92,12 @@ Respond in this exact JSON format:
     "uniqueness": <number 0-100>,
     "businessModel": <number 0-100>,
     "scalability": <number 0-100>,
-    "moat": <number 0-100>
+    "defensibility": <number 0-100>
   },
   "ycVerdict": "<YES|MAYBE|PASS>",
   "ycReason": "<one sentence explaining the YC verdict>",
   "killerInsight": "<one memorable, specific insight about this idea>",
-  "weakestArea": "<problem|market|solution|timing|uniqueness|businessModel|scalability|moat>"
+  "weakestArea": "<problem|market|solution|timing|uniqueness|businessModel|scalability|defensibility>"
 }
 
 Be brutally honest. Most ideas score 40-70. Only exceptional ideas score 80+. Terrible ideas can score below 30.`;

@@ -116,7 +116,7 @@
 					<ScoreBar label="Solution" score={scoreCard.dimensions.solution} delay={200} />
 					<ScoreBar label="Scalability" score={scoreCard.dimensions.scalability} delay={250} />
 					<ScoreBar label="Timing" score={scoreCard.dimensions.timing} delay={300} />
-					<ScoreBar label="Moat" score={scoreCard.dimensions.moat} delay={350} />
+					<ScoreBar label="Defensibility" score={scoreCard.dimensions.defensibility} delay={350} />
 				</div>
 			</div>
 
