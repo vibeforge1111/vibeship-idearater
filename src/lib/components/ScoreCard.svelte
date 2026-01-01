@@ -14,7 +14,7 @@
 	let showDetails = $state(false);
 	let typedText = $state('');
 	let isTyping = $state(true);
-	const fullText = 'vibeship.co/idearater';
+	const fullText = 'idearater.vibeship.co';
 
 	const getYCIcon = (verdict: string): string => {
 		switch (verdict) {

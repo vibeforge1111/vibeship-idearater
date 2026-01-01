@@ -15,14 +15,14 @@
 		const score = scoreCard.pmfScore;
 
 		if (stealthMode) {
-			if (score >= 70) return `My startup idea just scored ${score}/100. Feeling dangerous.\n\nThink yours can beat it? → vibeship.co/idearater`;
-			if (score >= 50) return `${score}/100 on the IdeaRater. Not bad, not done.\n\nWhat's your score? → vibeship.co/idearater`;
-			return `${score}/100. Brutal, but fair.\n\nGet roasted too → vibeship.co/idearater`;
+			if (score >= 70) return `My startup idea just scored ${score}/100. Feeling dangerous.\n\nThink yours can beat it? → idearater.vibeship.co`;
+			if (score >= 50) return `${score}/100 on the IdeaRater. Not bad, not done.\n\nWhat's your score? → idearater.vibeship.co`;
+			return `${score}/100. Brutal, but fair.\n\nGet roasted too → idearater.vibeship.co`;
 		}
 
-		if (score >= 70) return `${score}/100 PMF score. The idea hits.\n\nRate yours → vibeship.co/idearater`;
-		if (score >= 50) return `${score}/100. Room to grow, but there's something here.\n\nGet your score → vibeship.co/idearater`;
-		return `${score}/100. Back to the drawing board.\n\nHow bad is yours? → vibeship.co/idearater`;
+		if (score >= 70) return `${score}/100 PMF score. The idea hits.\n\nRate yours → idearater.vibeship.co`;
+		if (score >= 50) return `${score}/100. Room to grow, but there's something here.\n\nGet your score → idearater.vibeship.co`;
+		return `${score}/100. Back to the drawing board.\n\nHow bad is yours? → idearater.vibeship.co`;
 	};
 
 	const shareToX = () => {
@@ -32,13 +32,13 @@
 
 	const shareToLinkedIn = () => {
 		const text = encodeURIComponent(getShareText());
-		window.open(`https://www.linkedin.com/sharing/share-offsite/?url=https://vibeship.co/idearater&summary=${text}`, '_blank');
+		window.open(`https://www.linkedin.com/sharing/share-offsite/?url=https://idearater.vibeship.co&summary=${text}`, '_blank');
 	};
 
 	const copyLink = async () => {
 		copying = true;
 		try {
-			await navigator.clipboard.writeText(`https://vibeship.co/idearater?id=${scoreCard.id}`);
+			await navigator.clipboard.writeText(`https://idearater.vibeship.co?id=${scoreCard.id}`);
 			setTimeout(() => copying = false, 2000);
 		} catch {
 			copying = false;
