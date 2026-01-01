@@ -37,6 +37,7 @@
 				<div class="flex items-center gap-6 text-xs">
 					<a href="https://scanner.vibeship.co" target="_blank" class="text-vibe-muted hover:text-vibe-mint transition-colors">Scanner</a>
 					<a href="https://mind.vibeship.co" target="_blank" class="text-vibe-muted hover:text-vibe-mint transition-colors">Mind</a>
+					<a href="https://spawner.vibeship.co" target="_blank" class="text-vibe-muted hover:text-vibe-mint transition-colors">Spawner</a>
 					<a href="https://vibeship.co" target="_blank" class="text-vibe-muted hover:text-vibe-mint transition-colors">Ecosystem</a>
 				</div>
 				<div class="flex items-center gap-3">
@@ -55,7 +56,8 @@
 			</div>
 			<!-- Lower row -->
 			<div class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-4 border-t border-vibe-border">
-				<a href="https://vibeship.co" target="_blank" class="flex items-center gap-2 text-vibe-text hover:text-vibe-mint transition-colors">
+				<a href="https://vibeship.co" target="_blank" class="flex items-center gap-1.5 text-vibe-text hover:text-vibe-mint transition-colors">
+					<img src="/logo.png" alt="vibeship" class="w-[18px] h-[18px] invert" />
 					<span class="font-serif text-base">vibeship</span>
 				</a>
 				<div class="flex items-center gap-2 text-[11px] text-vibe-muted">
