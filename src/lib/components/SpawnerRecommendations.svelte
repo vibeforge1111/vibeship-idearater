@@ -150,7 +150,7 @@
 </script>
 
 <!-- Personalized Spawner CTA -->
-<div class="mt-6" in:fade={{ duration: 300, delay: 800 }}>
+<div class="mt-10" in:fade={{ duration: 300, delay: 800 }}>
 	<a
 		href="https://spawner.vibeship.co"
 		target="_blank"
