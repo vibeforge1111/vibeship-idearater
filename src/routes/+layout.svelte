@@ -34,7 +34,7 @@
 	<div class="fixed bottom-0 left-0 right-0 bg-vibe-surface border-t border-vibe-border p-4">
 		<div class="max-w-2xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
 			<p class="text-vibe-muted text-xs text-center sm:text-left">
-				We use Google Analytics to improve this site. <span class="text-vibe-mint">Your ideas are never stored.</span> By continuing, you agree to our use of analytics.
+				We use Google Analytics to improve this site. <span class="text-vibe-mint">Your ideas are never stored.</span> By continuing, you agree to our <a href="/privacy" class="text-vibe-mint hover:underline">Privacy Policy</a> and <a href="/terms" class="text-vibe-mint hover:underline">Terms</a>.
 			</p>
 			<button
 				onclick={acceptConsent}
