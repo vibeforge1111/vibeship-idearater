@@ -8,8 +8,8 @@ const client = new Anthropic({
 	apiKey: ANTHROPIC_API_KEY
 });
 
-// Rate limiting: 35 requests per day per IP
-const DAILY_LIMIT = 35;
+// Rate limiting: 10 requests per day per IP
+const DAILY_LIMIT = 10;
 const rateLimitMap = new Map<string, { count: number; resetTime: number }>();
 
 function getRateLimitInfo(ip: string): { allowed: boolean; remaining: number; resetTime: number } {
