@@ -57,7 +57,7 @@
 	};
 </script>
 
-<main class="min-h-screen py-12 sm:py-20">
+<main class="py-8 sm:py-12">
 	{#if appState === 'input'}
 		<div in:fade={{ duration: 300 }}>
 			<IdeaInput onSubmit={handleSubmit} />

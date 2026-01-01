@@ -23,7 +23,7 @@
 				completedSteps = [...completedSteps, currentStep];
 				currentStep++;
 			}
-		}, 1000); // Faster for 9 steps
+		}, 1000);
 
 		return () => clearInterval(interval);
 	});
@@ -34,7 +34,7 @@
 		<!-- Terminal header -->
 		<div class="flex items-center gap-3 mb-6 pb-4 border-b border-vibe-border">
 			<span class="text-vibe-mint">›</span>
-			<span class="text-vibe-muted text-sm">analyzing_idea.sh</span>
+			<span class="text-vibe-muted text-sm">PMF_validator</span>
 		</div>
 
 		<!-- Progress steps -->

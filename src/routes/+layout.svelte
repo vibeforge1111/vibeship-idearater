@@ -56,8 +56,8 @@
 			</div>
 			<!-- Lower row -->
 			<div class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-4 border-t border-vibe-border">
-				<a href="https://vibeship.co" target="_blank" class="flex items-center gap-1.5 text-vibe-text hover:text-vibe-mint transition-colors">
-					<img src="/logo.png" alt="vibeship" class="w-[18px] h-[18px] brightness-0 invert" />
+				<a href="https://vibeship.co" target="_blank" class="flex items-center gap-1 text-vibe-text hover:text-vibe-mint transition-colors">
+					<img src="/logo.png" alt="vibeship" class="w-[22px] h-[22px] brightness-0 invert" />
 					<span style="font-family: 'Instrument Serif', Georgia, serif;" class="text-base">vibeship</span>
 				</a>
 				<div class="flex items-center gap-2 text-[11px] text-vibe-muted">
