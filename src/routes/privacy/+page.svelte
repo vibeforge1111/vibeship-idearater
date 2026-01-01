@@ -16,7 +16,7 @@
 			<section>
 				<h2 class="text-vibe-mint font-semibold mb-2">What We Collect</h2>
 				<ul class="list-disc list-inside text-vibe-muted space-y-1">
-					<li><span class="text-vibe-text">Analytics data</span> - We use Google Analytics to understand how visitors use our site (pages visited, time on site, general location). This data is anonymized.</li>
+					<li><span class="text-vibe-text">Analytics data</span> - We use Google Analytics to track usage and growth (pages visited, time on site, general location). This data is anonymized.</li>
 					<li><span class="text-vibe-text">IP addresses</span> - Temporarily used for rate limiting (10 requests/day). Not stored permanently.</li>
 				</ul>
 			</section>
