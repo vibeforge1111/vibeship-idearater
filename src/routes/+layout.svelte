@@ -23,7 +23,7 @@
 	<meta name="description" content="Describe your startup idea. Get a brutally honest scorecard in 30 seconds. Share it or hide it." />
 	<link rel="preconnect" href="https://fonts.googleapis.com">
 	<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="anonymous">
-	<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
 </svelte:head>
 
 <div class="min-h-screen bg-vibe-bg flex flex-col">
@@ -57,8 +57,8 @@
 			<!-- Lower row -->
 			<div class="flex flex-col sm:flex-row justify-between items-center gap-4 pt-4 border-t border-vibe-border">
 				<a href="https://vibeship.co" target="_blank" class="flex items-center gap-1.5 text-vibe-text hover:text-vibe-mint transition-colors">
-					<img src="/logo.png" alt="vibeship" class="w-[18px] h-[18px] invert" />
-					<span class="font-serif text-base">vibeship</span>
+					<img src="/logo.png" alt="vibeship" class="w-[18px] h-[18px] brightness-0 invert" />
+					<span style="font-family: 'Instrument Serif', Georgia, serif;" class="text-base">vibeship</span>
 				</a>
 				<div class="flex items-center gap-2 text-[11px] text-vibe-muted">
 					<a href="/terms" class="hover:text-vibe-mint transition-colors">Terms</a>
