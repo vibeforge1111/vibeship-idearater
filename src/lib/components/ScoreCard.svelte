@@ -39,9 +39,11 @@
 
 <div class="terminal-box w-full" id="scorecard">
 	<!-- Terminal header bar -->
-	<div class="flex items-center gap-3 px-6 py-4 border-b border-vibe-border bg-vibe-bg">
-		<span class="text-vibe-mint">›</span>
-		<span class="text-vibe-muted text-sm">vibeship idearater</span>
+	<div class="flex items-center gap-2 px-6 py-4 border-b border-vibe-border bg-vibe-bg">
+		<div class="w-3 h-3 rounded-full bg-vibe-red"></div>
+		<div class="w-3 h-3 rounded-full bg-vibe-yellow"></div>
+		<div class="w-3 h-3 rounded-full bg-vibe-green"></div>
+		<span class="ml-3 text-vibe-muted text-sm">vibeship idearater</span>
 	</div>
 
 	<!-- Main content with generous padding -->
