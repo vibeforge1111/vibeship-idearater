@@ -1,38 +1,41 @@
-# sv
+# Vibeship IdeaRater
 
-Everything you need to build a Svelte project, powered by [`sv`](https://github.com/sveltejs/cli).
+Test if your startup idea has PMF (Product-Market Fit) potential. Get a brutally honest scorecard in 30 seconds.
 
-## Creating a project
+**[Try it live at idearater.vibeship.co](https://idearater.vibeship.co)**
 
-If you're seeing this, you've probably already done this step. Congrats!
+## How It Works
 
-```sh
-# create a new project in the current directory
-npx sv create
+1. Describe your startup idea in plain English
+2. Get rated across 8 dimensions (Problem, Market, Solution, Timing, Uniqueness, Revenue, Scalability, Moat)
+3. Receive an overall PMF score out of 100
+4. Share your scorecard or use stealth mode to hide your idea
 
-# create a new project in my-app
-npx sv create my-app
-```
+## Privacy & Data
 
-## Developing
+**Your ideas are never stored.** There is no database. When you submit an idea:
 
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
+- It goes directly to Anthropic's Claude API for analysis
+- The response is sent back to your browser
+- Nothing is saved on our servers
+- Once you close the tab, the idea is gone
 
-```sh
-npm run dev
+We use Google Analytics for basic usage tracking (page views, not your ideas).
 
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+## Tech Stack
 
-## Building
+- SvelteKit + TypeScript
+- Tailwind CSS v4
+- Claude Haiku (Anthropic API)
+- Hosted on Railway
 
-To create a production version of your app:
+## Part of the Vibeship Ecosystem
 
-```sh
-npm run build
-```
+- [Vibeship](https://vibeship.co) - Main ecosystem
+- [Scanner](https://scanner.vibeship.co) - Code scanner
+- [Mind](https://mind.vibeship.co) - AI memory
+- [Spawner](https://spawner.vibeship.co) - Project spawner
 
-You can preview the production build with `npm run preview`.
+## License
 
-> To deploy your app, you may need to install an [adapter](https://svelte.dev/docs/kit/adapters) for your target environment.
+Apache 2.0 - See [LICENSE](LICENSE) for details.
