@@ -1,0 +1,182 @@
+@import 'tailwindcss';
+
+:root {
+	--vibe-bg: #0d1117;
+	--vibe-surface: #151b23;
+	--vibe-border: #2d333b;
+	--vibe-text: #e6edf3;
+	--vibe-text-muted: #848d97;
+	--vibe-mint: #34d399;
+	--vibe-mint-light: #6ee7b7;
+	--vibe-mint-dark: #10b981;
+	--vibe-green: #34d399;
+	--vibe-yellow: #f0b429;
+	--vibe-red: #f87171;
+}
+
+@theme {
+	--font-mono: 'JetBrains Mono', 'Fira Code', 'SF Mono', Consolas, monospace;
+	--color-vibe-bg: #0d1117;
+	--color-vibe-surface: #151b23;
+	--color-vibe-border: #2d333b;
+	--color-vibe-text: #e6edf3;
+	--color-vibe-muted: #848d97;
+	--color-vibe-mint: #34d399;
+	--color-vibe-mint-light: #6ee7b7;
+	--color-vibe-green: #34d399;
+	--color-vibe-yellow: #f0b429;
+	--color-vibe-red: #f87171;
+}
+
+* {
+	box-sizing: border-box;
+}
+
+html, body {
+	margin: 0;
+	padding: 0;
+	background-color: var(--vibe-bg);
+	color: var(--vibe-text);
+	font-family: var(--font-mono);
+	min-height: 100vh;
+}
+
+::selection {
+	background: var(--vibe-purple);
+	color: white;
+}
+
+/* Terminal-style scrollbar */
+::-webkit-scrollbar {
+	width: 8px;
+	height: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: var(--vibe-surface);
+}
+
+::-webkit-scrollbar-thumb {
+	background: var(--vibe-border);
+}
+
+::-webkit-scrollbar-thumb:hover {
+	background: var(--vibe-muted);
+}
+
+/* Accent text utility */
+.gradient-text {
+	color: var(--vibe-mint);
+}
+
+/* Terminal box styling */
+.terminal-box {
+	background: var(--vibe-surface);
+	border: 1px solid var(--vibe-border);
+	position: relative;
+}
+
+.terminal-box::before {
+	content: '';
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	height: 1px;
+	background: var(--vibe-mint);
+	opacity: 0.5;
+}
+
+/* Glow effects */
+.glow-mint {
+	box-shadow: 0 0 20px rgba(62, 207, 178, 0.3);
+}
+
+.glow-mint-light {
+	box-shadow: 0 0 20px rgba(94, 234, 212, 0.3);
+}
+
+.glow-cyan {
+	box-shadow: 0 0 20px rgba(6, 182, 212, 0.3);
+}
+
+/* Cursor blink animation */
+@keyframes blink {
+	0%, 50% { opacity: 1; }
+	51%, 100% { opacity: 0; }
+}
+
+.cursor-blink::after {
+	content: '▋';
+	animation: blink 1s infinite;
+	color: var(--vibe-mint);
+}
+
+/* Progress bar animation */
+@keyframes shimmer {
+	0% { background-position: -200% 0; }
+	100% { background-position: 200% 0; }
+}
+
+.shimmer {
+	background: linear-gradient(90deg, transparent, rgba(255,255,255,0.1), transparent);
+	background-size: 200% 100%;
+	animation: shimmer 1.5s infinite;
+}
+
+/* Fade in animation */
+@keyframes fadeIn {
+	from { opacity: 0; transform: translateY(10px); }
+	to { opacity: 1; transform: translateY(0); }
+}
+
+.animate-fade-in {
+	animation: fadeIn 0.5s ease-out forwards;
+}
+
+/* Staggered fade in */
+.stagger-1 { animation-delay: 0.1s; }
+.stagger-2 { animation-delay: 0.2s; }
+.stagger-3 { animation-delay: 0.3s; }
+.stagger-4 { animation-delay: 0.4s; }
+.stagger-5 { animation-delay: 0.5s; }
+
+/* Score reveal animation */
+@keyframes countUp {
+	from { opacity: 0; transform: scale(0.5); }
+	to { opacity: 1; transform: scale(1); }
+}
+
+.animate-score-reveal {
+	animation: countUp 0.6s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* Button hover effect */
+.btn-vibe {
+	background: var(--vibe-mint);
+	color: var(--vibe-bg);
+	transition: all 0.2s ease;
+}
+
+.btn-vibe:hover {
+	background: var(--vibe-mint-light);
+}
+
+/* Input focus effect */
+.input-vibe:focus {
+	outline: none;
+	border-color: var(--vibe-mint);
+	box-shadow: 0 0 0 3px rgba(62, 207, 178, 0.2);
+}
+
+/* Typing effect for loading states */
+@keyframes typing {
+	from { width: 0; }
+	to { width: 100%; }
+}
+
+.typing-effect {
+	overflow: hidden;
+	white-space: nowrap;
+	animation: typing 2s steps(40, end);
+}
