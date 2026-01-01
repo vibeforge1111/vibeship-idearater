@@ -57,7 +57,7 @@
 </script>
 
 <div class="flex flex-col items-center justify-center min-h-[70vh] py-8">
-	<div class="terminal-box w-full max-w-md">
+	<div class="terminal-box w-full max-w-md min-h-[420px]">
 		<!-- Terminal window header with dots -->
 		<div class="flex items-center gap-2 px-4 py-3 border-b border-vibe-border bg-vibe-bg">
 			<div class="w-3 h-3 rounded-full bg-vibe-red"></div>
