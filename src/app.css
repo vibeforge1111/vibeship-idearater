@@ -115,7 +115,7 @@ html, body {
 }
 
 .animate-blink {
-	animation: blink 0.8s infinite;
+	animation: blink 1.4s infinite;
 }
 
 /* Progress bar animation */

@@ -134,7 +134,7 @@
 					{#if showYcTooltip}
 						<div class="absolute top-full left-0 mt-2 px-3 py-2 bg-vibe-surface border border-vibe-border text-xs text-vibe-text whitespace-normal w-80 z-50 shadow-lg">
 							<span class="text-vibe-yc font-semibold">Y Combinator Verdict</span><br/>
-							Would this idea get into YC? Based on whether it solves a clear problem with a viable, product-led growth mechanism.
+							Y Combinator is the world's top startup incubator, known for spawning unicorns like Airbnb, Stripe, and Dropbox. This verdict estimates if your idea could get in.
 							<div class="absolute bottom-full left-4 w-0 h-0 border-l-4 border-r-4 border-b-4 border-transparent border-b-vibe-border"></div>
 						</div>
 					{/if}
