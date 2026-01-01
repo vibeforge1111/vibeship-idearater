@@ -63,7 +63,7 @@
 					clearInterval(typeInterval);
 					isTyping = false;
 				}
-			}, 80);
+			}, 150);
 		}, 1200);
 	});
 </script>
