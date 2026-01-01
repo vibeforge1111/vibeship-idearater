@@ -1,6 +1,7 @@
 export interface ScoreCard {
 	id: string;
 	idea: string;
+	pitch: string; // One-liner pitch version of the idea
 	pmfScore: number; // Overall PMF Potential score (average of all dimensions)
 	verdict: string;
 	dimensions: {

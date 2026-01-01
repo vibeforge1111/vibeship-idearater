@@ -12,6 +12,7 @@
 	--vibe-green: #34d399;
 	--vibe-yellow: #f0b429;
 	--vibe-red: #f87171;
+	--vibe-yc: #f26522;
 }
 
 @theme {
@@ -26,6 +27,7 @@
 	--color-vibe-green: #34d399;
 	--color-vibe-yellow: #f0b429;
 	--color-vibe-red: #f87171;
+	--color-vibe-yc: #f26522;
 }
 
 * {
@@ -110,6 +112,10 @@ html, body {
 	content: '▋';
 	animation: blink 1s infinite;
 	color: var(--vibe-mint);
+}
+
+.animate-blink {
+	animation: blink 0.8s infinite;
 }
 
 /* Progress bar animation */

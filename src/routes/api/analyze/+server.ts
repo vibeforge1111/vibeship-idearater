@@ -81,6 +81,7 @@ const USER_PROMPT = (idea: string) => `Evaluate this startup idea:
 
 Respond in this exact JSON format:
 {
+  "pitch": "<8-12 word pitch version of this idea, like a tagline>",
   "pmfScore": <number 0-100, should be close to the average of all dimensions>,
   "verdict": "<one short sentence summarizing the idea's potential>",
   "dimensions": {
@@ -161,6 +162,7 @@ export const POST: RequestHandler = async ({ request }) => {
 		const scoreCard: ScoreCard = {
 			id,
 			idea: idea.trim(),
+			pitch: analysisResult.pitch,
 			pmfScore: analysisResult.pmfScore,
 			verdict: analysisResult.verdict,
 			dimensions: analysisResult.dimensions,

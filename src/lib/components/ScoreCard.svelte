@@ -13,6 +13,7 @@
 	let showScore = $state(false);
 	let showDetails = $state(false);
 	let typedText = $state('');
+	let isTyping = $state(true);
 	const fullText = 'vibeship.co/idearater';
 
 	const getYCIcon = (verdict: string): string => {
@@ -46,8 +47,9 @@
 					i++;
 				} else {
 					clearInterval(typeInterval);
+					isTyping = false;
 				}
-			}, 50);
+			}, 80);
 		}, 1200);
 	});
 </script>
@@ -58,7 +60,7 @@
 		<div class="w-3 h-3 rounded-full bg-vibe-red"></div>
 		<div class="w-3 h-3 rounded-full bg-vibe-yellow"></div>
 		<div class="w-3 h-3 rounded-full bg-vibe-green"></div>
-		<span class="ml-3 text-vibe-muted text-sm">vibeship idearater</span>
+		<span class="ml-3 text-vibe-muted text-sm">vibeship</span>
 	</div>
 
 	<!-- Main content - horizontal layout -->
@@ -77,23 +79,25 @@
 			{/if}
 
 			{#if showDetails}
-				<!-- The Idea -->
+				<!-- The Pitch -->
 				{#if !stealthMode}
-					<div class="flex-1 p-3 bg-vibe-bg border border-vibe-border" in:fade={{ duration: 300 }}>
-						<p class="text-vibe-muted text-xs mb-1">The Idea</p>
-						<p class="text-vibe-text text-sm leading-snug">{scoreCard.idea}</p>
+					<div class="flex-1 p-3 bg-vibe-bg border border-vibe-border min-w-0" in:fade={{ duration: 300 }}>
+						<p class="text-vibe-muted text-xs mb-1">The Pitch</p>
+						<p class="text-vibe-text text-sm leading-snug">{scoreCard.pitch}</p>
 					</div>
 				{:else}
 					<div class="flex-1 p-3 bg-vibe-bg border border-vibe-border" in:fade={{ duration: 300 }}>
-						<p class="text-vibe-mint text-sm">Ask me about my {scoreCard.pmfScore}/100 idea</p>
+						<p class="text-vibe-muted text-xs mb-1">[STEALTH MODE]</p>
+						<p class="text-vibe-mint text-sm">Idea hidden. Score revealed.</p>
 					</div>
 				{/if}
 
 				<!-- YC Verdict -->
-				<div class="flex-shrink-0 p-3 bg-vibe-bg border border-vibe-border" in:fade={{ duration: 300, delay: 200 }}>
+				<div class="flex-shrink-0 p-3 bg-vibe-yc/5 border border-vibe-yc/30" in:fade={{ duration: 300, delay: 200 }}>
 					<div class="flex items-center gap-2 mb-1">
+						<span class="text-vibe-yc font-bold text-sm">YC</span>
 						<span class="{getYCColor(scoreCard.ycVerdict)} font-mono text-sm">[{getYCIcon(scoreCard.ycVerdict)}]</span>
-						<span class="text-vibe-text font-bold text-sm">YC: {scoreCard.ycVerdict}</span>
+						<span class="text-vibe-text font-bold text-sm">{scoreCard.ycVerdict}</span>
 					</div>
 					<p class="text-vibe-muted text-xs max-w-48">{scoreCard.ycReason}</p>
 				</div>
@@ -123,10 +127,9 @@
 			</div>
 
 			<!-- Footer with typing animation -->
-			<div class="flex items-center gap-3 pt-3 border-t border-vibe-border">
-				<span class="text-vibe-mint">$</span>
-				<span class="text-vibe-muted text-sm font-mono">{typedText}</span>
-				<span class="text-vibe-mint animate-pulse">▋</span>
+			<div class="flex items-center gap-3 pt-4 mt-2 border-t border-vibe-border">
+				<span class="text-vibe-mint text-base">$</span>
+				<span class="text-vibe-text text-base font-mono tracking-wide">{typedText}</span><span class="text-vibe-mint text-base animate-blink">▋</span>
 			</div>
 		{/if}
 	</div>
